@@ -6,14 +6,14 @@ public class Interfaz {
     private Pais p=new Pais();
     private  Scanner sc = new Scanner(System.in);
     public Interfaz(){
-  	//implementar
+  	p=Pais.leer();
     }
 
     public void grabar(){
-	//implementar
+	p.grabar();
     }
     public static void ayuda(){
-        System.out.println("introduzca ua de las siguientes peticiones: \n addProvindia: añadir provincia\n addMunicipio: añadir Municipio\n addLocalidad: añadir Localidad\n list: listar el contenido\n read: lectura inicial\n exit: salir\n");
+        System.out.println("introduzca una de las siguientes peticiones: \n addProvindia: añadir provincia\n addMunicipio: añadir Municipio\n addLocalidad: añadir Localidad\n list: listar el contenido\n read: lectura inicial\n exit: salir\n");
 
     }
     public  boolean procesarPeticion (String [] p){
@@ -23,7 +23,7 @@ public class Interfaz {
             else if (p[0].equals("addMunicipio"))
                aniadirMunicipio();
             else if (p[0].equals("addLocalidad"))
-            aniadirLocalidad();
+               aniadirLocalidad();
             else if (p[0].equals("read"))
 	            leer();
 	        else if (p[0].equals("list"))
@@ -45,15 +45,46 @@ public class Interfaz {
         return true;//en todos los casos debe seguir pidiendo y procesando peticiones
     }
     public  void aniadirProvincia(){
-	//implementar
+	System.out.print ("Nombre de la provincia: ");
+	String nombre=sc.nextLine();
+	p.add(new Provincia(nombre));
     }
 
     public  void aniadirMunicipio(){
-	//implementar
+	System.out.println("Listado de provincias");
+	for (int i=0;i<p.size();i++)
+	    System.out.println(i+".- "+p.getProvincia(i));
+	System.out.print("Número de provincia: ");
+	int i=sc.nextInt();
+	sc.nextLine();
+	System.out.print("Nombre del municipio: ");
+	String nombre=sc.nextLine();
+	p.getProvincia(i).add(new Municipio(nombre));
     }
 
     public  void aniadirLocalidad(){
-	//implementar
+	System.out.println("Listado de provincias");
+	for (int i=0;i<p.size();i++)
+	    System.out.println(i+".- "+p.getProvincia(i));
+	System.out.print("Número de provincia: ");
+	int i=sc.nextInt();
+	Provincia pr=p.getProvincia(i);
+	sc.nextLine();
+	System.out.println("Listado de municipios de la provincia de "+pr.getNombre());
+	for (int i=0;i<pr.size();i++)
+	    System.out.println(i+".- "+p.getMunicipio(i));
+	System.out.print("Número de municipio: ");
+	i=sc.nextInt();
+	sc.nextLine();
+	Municipio mn=pr.getMunicipio(i);
+	System.out.print("Nombre de la localidad: ");
+	nombre=sc.nextLine();
+	Municipio mn=pr.getMunicipio(i);
+	System.out.print("Poblacion: ");
+	int poblacion=sc.nextInt();
+	sc.nextLine();
+	mn.add(new localidad(nombre,poblacion));
+
     }
     public String [] leerPeticion(){
         System.out.print("?>");

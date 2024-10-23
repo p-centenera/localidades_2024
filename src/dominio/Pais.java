@@ -1,6 +1,7 @@
 package dominio;
+import java.io.*;
 import java.util.ArrayList;
-public class Pais {
+public class Pais implements Serializable{
     private String nombre;
     private ArrayList<Provincia> provincias;
     public Pais add(Provincia provincia){
@@ -29,7 +30,23 @@ public class Pais {
     public int size(){
         return provincias.size();
     }
-
-
-
+    public void grabar(){
+	try {
+	    ObjectOutputStream fo=new ObjectOutputStream (new FileOutputStream("pais.ser"));
+	    fo.writeObject(this);
+	    fo.close();
+	} catch (Exception e){
+	    System.out.println("error de escritura");
+	}
+    }
+    public static Pais leer(){
+	try {
+	    ObjectInputStream fi=new ObjectInputStream(new FileInputStream("pais.ser"));     
+	    Pais p= (Pais) fi.readObject();
+	    fi.close();
+	    return p;
+	} catch (Exception e){
+	    return new Pais();
+	}
+    }
 }
