@@ -27,7 +27,7 @@ public class Interfaz {
             else if (p[0].equals("read"))
 	            leer();
 	        else if (p[0].equals("list"))
-                    System.out.println (p);
+                    System.out.println (this.p);
             else if (p[0].equals("help"))
 		    ayuda();
             else if (p[0].equals("exit")){
@@ -71,19 +71,18 @@ public class Interfaz {
 	Provincia pr=p.getProvincia(i);
 	sc.nextLine();
 	System.out.println("Listado de municipios de la provincia de "+pr.getNombre());
-	for (int i=0;i<pr.size();i++)
-	    System.out.println(i+".- "+p.getMunicipio(i));
+	for (i=0;i<pr.size();i++)
+	    System.out.println(i+".- "+pr.getMunicipio(i));
 	System.out.print("Número de municipio: ");
 	i=sc.nextInt();
 	sc.nextLine();
 	Municipio mn=pr.getMunicipio(i);
 	System.out.print("Nombre de la localidad: ");
-	nombre=sc.nextLine();
-	Municipio mn=pr.getMunicipio(i);
+	String nombre=sc.nextLine();
 	System.out.print("Poblacion: ");
 	int poblacion=sc.nextInt();
 	sc.nextLine();
-	mn.add(new localidad(nombre,poblacion));
+	mn.add(new Localidad(nombre,poblacion));
 
     }
     public String [] leerPeticion(){
@@ -94,6 +93,7 @@ public class Interfaz {
 
     public  void leer(){
             String nombreP, nombreM, nombreL;
+	    p.setNombre("España");
             do {
             System.out.print("Introduce el nombre de la provincia (<enter> para finalizar: ");
             nombreP=sc.nextLine();

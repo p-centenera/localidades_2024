@@ -3,7 +3,7 @@ import java.io.*;
 import java.util.ArrayList;
 public class Pais implements Serializable{
     private String nombre;
-    private ArrayList<Provincia> provincias;
+    private ArrayList<Provincia> provincias=new ArrayList<Provincia>();
     public Pais add(Provincia provincia){
         provincias.add(provincia);
         return this;
@@ -11,6 +11,10 @@ public class Pais implements Serializable{
     public String getNombre() {
         return nombre;
     }
+    public Pais setNombre(String nombre_){
+	nombre=nombre_;
+	return this;
+    }    
     public int getPoblacion(){
         int poblacion=0;
         for(Provincia provincia:provincias){
